@@ -1,6 +1,8 @@
 import express, { Express } from 'express'
 import cors from 'cors'
 
+require('dotenv').config()
+
 import { todoRoutes } from './routes/index'
 import * as AppMiddleWare from './middleware/index'
 

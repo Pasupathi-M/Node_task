@@ -7,10 +7,60 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL_TWO")
 }
 
-model Todo {
-  id Int @id @default(autoincrement())
-  todoName String
+// model Todo {
+//   id       Int    @id @default(autoincrement())
+//   todoName String
+// }
+
+model User {
+  userId     String    @id @default(uuid())
+  name       String
+  email      String
+  role       Role      @relation(fields: [userRoleId], references: [roleId])
+  userRoleId String
+  password   String
+  createdAt  DateTime?
+  updatedAt  DateTime  @default(now())
+}
+
+model Role {
+  roleId    String    @id @default(uuid())
+  roleName  String
+  createdAt DateTime?
+  updatedAt DateTime  @default(now())
+  User      User[]
+}
+
+model Product {
+  productId   String    @id @default(uuid())
+  productName String
+  quantity    BigInt
+  price       Float
+  createdAt   DateTime?
+  updatedAt   DateTime
+  Sales       Sales[]
+}
+
+model Customer {
+  customerId   String    @id @default(uuid())
+  customerName String
+  phNo         Int?
+  createdAt    DateTime?
+  updatedAt    DateTime? @default(now())
+  Sales        Sales[]
+}
+
+model Sales {
+  saleId        String    @id @default(uuid())
+  customer      Customer  @relation(fields: [custId], references: [customerId])
+  custId        String
+  product       Product   @relation(fields: [slProdId], references: [productId])
+  slProdId      String
+  totalQuantity Int
+  totalPrice    Float
+  createdAt     DateTime?
+  updatedAt     DateTime  @default(now())
 }
