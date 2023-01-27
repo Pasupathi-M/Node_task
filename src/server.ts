@@ -3,7 +3,8 @@ import cors from 'cors'
 
 require('dotenv').config()
 
-import { todoRoutes } from './routes/index'
+// import { todoRoutes } from './routes/index'
+import { AppRoutes } from './routes/app-routes'
 import * as AppMiddleWare from './middleware/index'
 
 const App: Express = express()
@@ -14,7 +15,7 @@ App.use(express.json())
 App.use(cors())
 
 // Api routes
-App.use(todoRoutes(express))
+App.use(AppRoutes(express))
 
 App.use('*', AppMiddleWare.NotFound)
 

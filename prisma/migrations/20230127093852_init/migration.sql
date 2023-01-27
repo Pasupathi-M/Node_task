@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Customer" ALTER COLUMN "phNo" SET DATA TYPE BIGINT;

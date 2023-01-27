@@ -1,11 +1,19 @@
 -- CreateTable
+CREATE TABLE "Todo" (
+    "id" SERIAL NOT NULL,
+    "todoName" TEXT NOT NULL,
+
+    CONSTRAINT "Todo_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "User" (
     "userId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "userRoleId" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3),
+    "createdAt" TEXT,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("userId")
@@ -15,7 +23,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Role" (
     "roleId" TEXT NOT NULL,
     "roleName" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3),
+    "createdAt" TEXT,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Role_pkey" PRIMARY KEY ("roleId")
@@ -27,8 +35,8 @@ CREATE TABLE "Product" (
     "productName" TEXT NOT NULL,
     "quantity" BIGINT NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
-    "createdAt" TIMESTAMP(3),
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TEXT,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("productId")
 );
@@ -38,7 +46,7 @@ CREATE TABLE "Customer" (
     "customerId" TEXT NOT NULL,
     "customerName" TEXT NOT NULL,
     "phNo" INTEGER,
-    "createdAt" TIMESTAMP(3),
+    "createdAt" TEXT,
     "updatedAt" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Customer_pkey" PRIMARY KEY ("customerId")
@@ -51,7 +59,7 @@ CREATE TABLE "Sales" (
     "slProdId" TEXT NOT NULL,
     "totalQuantity" INTEGER NOT NULL,
     "totalPrice" DOUBLE PRECISION NOT NULL,
-    "createdAt" TIMESTAMP(3),
+    "createdAt" TEXT,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Sales_pkey" PRIMARY KEY ("saleId")

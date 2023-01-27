@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { db } from "../db/database";
+import { APP_DB } from "../db/database";
 import { APIResponse } from "../utils/response";
 
 class TodoList {
@@ -10,7 +10,7 @@ class TodoList {
   async getAllTodo(req: Request, res: Response) {
     const apiResponse = new APIResponse(req, res);
     try {
-      const responseData = await db.todo.findMany();
+      const responseData = await APP_DB.todo.findMany();
       responseData.map(
         (item: Record<string, any>, idx) => (item.seno = idx + 1)
       );
@@ -26,7 +26,7 @@ class TodoList {
   async addTodo(req: Request, res: Response) {
     const apiResponse = new APIResponse(req, res);
     try {
-      const responseData = await db.todo.create({ data: { ...req.body } });
+      const responseData = await APP_DB.todo.create({ data: { ...req.body } });
       apiResponse.success(responseData);
       // res.send({
       //   data: responseData,
@@ -40,7 +40,7 @@ class TodoList {
     const apiResponse = new APIResponse(req, res);
     try {
 
-      const responseData = await db.todo.update({
+      const responseData = await APP_DB.todo.update({
         where: {
           id: Number(req.params.id),
         },
@@ -56,7 +56,7 @@ class TodoList {
   async deleteTodo(req: Request, res: Response) {
     const apiResponse = new APIResponse(req, res);
     try {
-      const responseData = await db.todo.delete({
+      const responseData = await APP_DB.todo.delete({
         where: {
           id: Number(req.params.id),
         },

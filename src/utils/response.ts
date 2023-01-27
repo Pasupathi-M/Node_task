@@ -6,7 +6,7 @@ export class APIResponse {
   apiRes: Response;
   codeWithMsg: Record<string, any>;
 
-  constructor(apiReq: Request, apiRes: Response) {
+  constructor(apiReq: Request | any, apiRes: Response | any) {
     this.apiReq = apiReq;
     this.apiRes = apiRes;
     this.codeWithMsg = MESG_AND_STATUS_CODE;
