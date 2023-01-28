@@ -18,7 +18,7 @@ model Todo {
 model User {
   userId     String   @id @default(uuid())
   name       String
-  email      String
+  email      String   @unique()
   role       Role     @relation(fields: [userRoleId], references: [roleId])
   userRoleId String
   password   String

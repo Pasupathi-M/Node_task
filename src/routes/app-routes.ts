@@ -1,16 +1,23 @@
 import express, { Express, Router } from "express";
 
 import * as Controller from "../controller/index";
+import * as AuthMiddleWare from '../middleware/authentication'
 
 export function AppRoutes(app: any): express.Router {
   const route = app.Router();
 
+  //-----------------------Create user------------------
+
+  route
+    .post("/create-user", Controller.Auth.createUser)
+    .post("/signin-user", Controller.Auth.userSignIn);
+
   //------------------------ TODO--------------------------------
 
-  route.get("/list-todo", Controller.TodoList.getAllTodo);
-  route.post("/add-todo", Controller.TodoList.addTodo);
-  route.put("/update-todo/:id", Controller.TodoList.updateTodo);
-  route.delete("/delete-todo/:id", Controller.TodoList.deleteTodo);
+  route.get("/list-todo", AuthMiddleWare.Authentication, Controller.TodoList.getAllTodo);
+  route.post("/add-todo", AuthMiddleWare.Authentication, Controller.TodoList.addTodo);
+  route.put("/update-todo/:id", AuthMiddleWare.Authentication, Controller.TodoList.updateTodo);
+  route.delete("/delete-todo/:id", AuthMiddleWare.Authentication, Controller.TodoList.deleteTodo);
 
 
   //-------------------------Prisma--------------------------------------

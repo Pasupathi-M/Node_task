@@ -1,7 +1,8 @@
 import express, { Express } from 'express'
 import cors from 'cors'
+import * as path from 'path'
 
-require('dotenv').config()
+export const dotenv = require('dotenv').config({ path: path.join(__dirname, `../.env`)})
 
 // import { todoRoutes } from './routes/index'
 import { AppRoutes } from './routes/app-routes'

@@ -75,4 +75,4 @@ class PrimsRestApi {
   }
 }
 
-export default new PrimsRestApi
+export default new PrimsRestApi()

@@ -12,21 +12,29 @@ export class APIResponse {
     this.codeWithMsg = MESG_AND_STATUS_CODE;
   }
 
-  success(resData: Record<string, unknown> | Record<string, unknown>[]) {
+  success(resData: Record<string, unknown> | Record<string, unknown>[], passHeader?: boolean) {
     const [code, message] = this.codeWithMsg[this.apiReq.method];
     const customResObj = {
-      resData,
       status: true,
       statusCode: code,
       message
     } as  Record<string, any>;
+    
+    if(passHeader){
+      customResObj.message = 'User logged in successfully'
+      const { headerName, token }: Record<string, any> = resData;
+      this.apiRes.setHeader(headerName, token)
+    }else{
+      customResObj.resData = resData
+    }
+    
     this.apiRes.status(defaultStatusCode).send(customResObj)
   }
 
-  faild(error: Error) {
+  faild(error: Error | any) {
     const customResObj = {
       status: false,
-      statusCode: statusCode[7], 
+      statusCode: error.statusCode ? error.statusCode : statusCode[7], 
       message: error['message'],
     } as Record<string, any>;
 
