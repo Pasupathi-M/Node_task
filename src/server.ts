@@ -13,7 +13,9 @@ const App: Express = express()
 // Middlewares
 App.use(express.urlencoded({ extended: true }))
 App.use(express.json())
-App.use(cors())
+App.use(cors({
+    exposedHeaders: 'Authorization'
+}))
 
 // Api routes
 App.use(AppRoutes(express))

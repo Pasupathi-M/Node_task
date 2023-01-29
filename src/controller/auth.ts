@@ -34,6 +34,7 @@ class Auth {
         
       console.log("Signin", findUser);
       apiResponse.success({
+        userName: findUser.name,
         headerName: 'access-token',
         token
       }, true);

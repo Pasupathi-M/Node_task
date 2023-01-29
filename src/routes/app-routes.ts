@@ -6,6 +6,9 @@ import * as AuthMiddleWare from '../middleware/authentication'
 export function AppRoutes(app: any): express.Router {
   const route = app.Router();
 
+  //--------------- Roles--------------------------
+  route.get('/all-roles', Controller.TodoList.getRolles)
+
   //-----------------------Create user------------------
 
   route

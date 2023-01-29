@@ -21,8 +21,10 @@ export class APIResponse {
     } as  Record<string, any>;
     
     if(passHeader){
+      const { headerName, token, userName }: Record<string, any> = resData;
       customResObj.message = 'User logged in successfully'
-      const { headerName, token }: Record<string, any> = resData;
+      customResObj.userName = userName
+      customResObj.token = token
       this.apiRes.setHeader(headerName, token)
     }else{
       customResObj.resData = resData

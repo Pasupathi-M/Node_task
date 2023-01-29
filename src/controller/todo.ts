@@ -66,6 +66,17 @@ class TodoList {
       apiResponse.faild(error);
     }
   }
+
+  async getRolles(req: Request, res: Response) {
+    const apiResponse = new APIResponse(req, res);
+    try{
+      const resData = await APP_DB.role.findMany();
+      console.log("ALL role", resData)
+      apiResponse.success(resData)
+    }catch(e){
+      apiResponse.faild(e)
+    }
+  }
 }
 
 export default new TodoList();
